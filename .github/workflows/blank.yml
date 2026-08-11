@@ -30,17 +30,19 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      # Path adjust karein (e.g., ./android) agar project subfolder me hai
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+        # working-directory: ./your-subfolder-name  # Un-comment aur update karein agar zarurat ho
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
+        # working-directory: ./your-subfolder-name  # Un-comment aur update karein agar zarurat ho
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: JARVIS-AI-Debug-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: '**/build/outputs/apk/debug/app-debug.apk'
           retention-days: 7
           
-        
